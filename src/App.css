@@ -1,0 +1,104 @@
+.navitem{
+  color: #aaa6a6;
+  margin: 0px 0px 0px 5px;
+  padding: 0px 10px 0px 0px;
+}
+.navitem:hover{
+  color: aliceblue;
+}
+#dp{
+  border-radius: 50%;
+}
+#name{
+  color: azure;
+}
+.login{
+  background-image: url('./back.jpg');
+  text-align: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10% 10% 68% 10%;
+  color: aliceblue;
+}
+a{
+  color: aliceblue;
+}
+.row{
+  margin-top: 1%;
+}
+h6{
+  margin: 5%;
+}
+.footer{
+  background-color: aqua;
+  padding:1%;
+  color:black;
+  text-align: center;
+}
+.index{
+  color: black;
+}
+.toggle{
+  margin: 0px 5px 0px 5px;
+}
+.layout{
+  padding: 50px 0px 10px 0px;
+  background-color: aliceblue;
+  justify-content: center;
+  text-align: center;
+}
+#h:hover{
+  color: greenyellow ;
+}
+.profilepic{
+  height: 150px;
+  border-radius: 50%;
+  margin: 1% 0% 0% 0%;
+  border: 2px solid black;
+  padding: 2px;
+}
+.edit{
+  padding-top: 52px;
+  padding-right: 17px;
+  background-color: aliceblue;
+  justify-content: center;
+  text-align: right;
+}
+.editprof{
+  border: 1px solid black;
+  padding: 3px;
+  border-radius: 8%;
+  font-size: 14px;
+}
+.editprof:hover{
+  color: black;
+  border-color: aqua;
+  font-size: 13.5px;
+  background-color: aqua;
+}
+.prof{
+  padding-top: 0px;
+}
+.details{
+  border-top: 2px solid black;
+  background-color: aliceblue;
+  justify-content: center;
+  text-align: left;
+  padding: 5px 0px 1px 17px;
+}
+.options{
+  margin-top: 5px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  justify-content: center;
+  text-align: center;
+}
+.option:hover{
+  border: 2px solid red;
+  padding: 2px;
+  font-size: 14px;
+  color: red;
+  border-radius: 4px;
+}
