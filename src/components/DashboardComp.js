@@ -73,7 +73,7 @@ class Dashboard extends React.Component{
 
     //fire.database().ref(collegeid+'/college/').set({id:collegeid,name:'National Institute of Technology, Hamirpur'})
 
-    //fire.database().ref(collegeid+'/college/classes/'+this.makeid(8)).set({subject:'Computer Programming',classlink:'https://lintomyinfo.web.app',classcode:'w3rg5ty',time:'06:00 PM 12/08/2020',duration:'60 minutes'})
+    //fire.database().ref(collegeid+'/college/classes/'+this.makeid(8)).set({subject:'Engineering Mathematics-II',classlink:'https://linktomyinfo.web.app',classcode:'we23r5k',time:'01:00 PM 13/08/2020',duration:'60 minutes'})
 
     fire.database().ref(collegeid+'/college/')
     .on("value",(snapshot)=>{
