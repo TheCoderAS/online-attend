@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Redirect, Switch} from 'react-router-dom'
 import Header from './HeaderComp'
+import Footer from './FooterComp'
 import firebase from '../config/config'
 import Login from './LoginPage'
 import Dashboard from './DashboardComp'
@@ -41,17 +42,19 @@ class Home extends React.Component{
       {this.state.status?(
         <>
           <Header displayName={this.state.user.displayName} photoUrl={this.state.user.photoURL}/>
-          <Route exact path="/home" component={()=><Dashboard/>}></Route>
+          <Route exact path="/home" component={()=><Dashboard user={this.state.user}/>}></Route>
           <Route exact path="/contact" component={()=><Contact/>}></Route>
           <Route exact path="/about" component={()=><About/>}></Route>
           <Route exact path="/profile" component={()=><Profile user={this.state.user}/>}></Route>
           <Redirect to="/home"/>
+          <Footer/>
         </>
       ):(
         <>
         <Route exact path="/user" component={()=><Login/>}></Route>
         <Route exact path="/" component={()=><Index/>}></Route>
         <Redirect to="/"/>
+        <Footer/>
         </>
       )}
     </Switch>

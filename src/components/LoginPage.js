@@ -2,6 +2,7 @@ import React from 'react'
 import {Button, Form, FormGroup, Input, Collapse} from 'reactstrap'
 import fire from '../config/config'
 import * as firebase from 'firebase'
+import logo from '../logo.png';
 
 class Login extends React.Component{
   constructor(props){
@@ -96,6 +97,7 @@ class Login extends React.Component{
     return(
       <>
       <div className="login">
+        <img src={logo} alt="logo" className="logo"/>
         <h1>Welcome to Online Attendance Manager!</h1>
         <br/>
         <Collapse isOpen={!this.state.signup&&!this.state.forget}>
@@ -177,9 +179,6 @@ class Login extends React.Component{
         <Button block size="md" type="button" color="primary" onClick={this.facebookLogin}><i className="fa fa-lg fa-facebook"></i>&nbsp;&nbsp;Continue with Facebook</Button>
         <Button block size="md" type="button" color="success" onClick={this.googleLogin}><i className="fa fa-lg fa-google"></i>&nbsp;&nbsp;Continue with Google</Button>
       </div>
-      <footer className="footer">
-        &#169;aku-online|@2020
-      </footer>
       </>
   )
   }
