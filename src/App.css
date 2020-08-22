@@ -49,7 +49,7 @@ h6{
   margin: 0px 5px 0px 5px;
 }
 .layout{
-  padding: 50px 10px 10px 10px;
+  padding: 50px 10px 50% 10px;
   background-color: aliceblue;
   justify-content: center;
   text-align: center;
@@ -85,13 +85,14 @@ h6{
 }
 .prof{
   padding-top: 0px;
+  padding-bottom: 10px;
 }
 .details{
   border-top: 2px solid black;
   background-color: aliceblue;
   justify-content: center;
   text-align: left;
-  padding: 5px 0px 1px 17px;
+  padding: 5px 0px 450px 17px;
 }
 .options{
   margin-top: 5px;
@@ -132,7 +133,8 @@ h7{
   margin: 0px 20px 0px 20px;
 }
 .list{
-  padding: 3px;
+  padding: 8px;
+  margin: 8px;
   border: 1px solid black ;
   color: black;border-left: 1px solid black;
 }
@@ -145,4 +147,36 @@ h7{
 }
 #link:hover{
   color: red;
+}
+.collegeinfo{
+  text-align: center;
+  border: 1px solid red;
+  border-bottom: 3px solid red;
+  margin-right: 17px;
+}
+h6{
+  margin: 8px;
+}
+.note{
+  text-align: left;
+}
+h3{
+  color:maroon
+}
+#cid{
+  font-size: 13px;
+}
+.teacher-panel{
+  border: 1px solid black;
+  padding: 5px;
+  text-align: right;
+}
+.addclassbtn{
+  text-align: left;
+  padding: 5px;
+  border-bottom: 1px dotted red;
+}
+.form{
+  justify-content: left;
+  text-align: left;
 }

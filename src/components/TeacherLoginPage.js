@@ -1,10 +1,9 @@
 import React from 'react'
 import {Button, Form, FormGroup, Input, Collapse} from 'reactstrap'
 import fire from '../config/config'
-import * as firebase from 'firebase'
 import logo from '../logo.png';
 
-class Login extends React.Component{
+class TeacherLogin extends React.Component{
   constructor(props){
     super(props)
     this.state={
@@ -14,7 +13,6 @@ class Login extends React.Component{
       passwords:'',
       passwordsc:'',
       name:'',
-      phone:'',
       signup:false,
       forget:false,
       emailforg:''
@@ -22,15 +20,15 @@ class Login extends React.Component{
     this.handleChange=this.handleChange.bind(this)
     this.toggleSignUp=this.toggleSignUp.bind(this)
     this.toggleForget=this.toggleForget.bind(this)
-
   }
   loginForm(e){
     e.preventDefault();
     var password=e.target.password.value
     var email=e.target.email.value
     fire.auth().signInWithEmailAndPassword(email,password).then((user)=>{
+
       //console.log('Login Successful!\n'+JSON.stringify(user.user))
-      console.log('Login Successful!\n')
+      console.log('Teacher Login Successful!\n')
     }).catch((err)=>{
       alert(err.message);
     })
@@ -59,7 +57,13 @@ class Login extends React.Component{
     fire.auth().createUserWithEmailAndPassword
     (email,password)
     .then((user)=>{
-      console.log('Signup Successful!')
+      fire.database().ref('tors/'+user.user.uid).set({teacher:true,id:user.user.uid}).then(()=>{
+        console.log('College Registration Successful!')
+      })
+      fire.database().ref(user.user.uid+'/college/').set({id:user.user.uid,name:name})
+      fire.database().ref('users/'+user.user.uid).set({
+        collegename:name,connected:true,id:user.user.uid,teacher:true
+      })
       const currentUser=fire.auth().currentUser;
       currentUser.updateProfile({
         displayName:name,
@@ -70,22 +74,6 @@ class Login extends React.Component{
     }
     else
     alert('Password did not match!')
-  }
-  facebookLogin(){
-    var provider=new firebase.auth.FacebookAuthProvider();
-    fire.auth().signInWithPopup(provider).then((result)=>{
-      console.log('Signed in with Facebook!')
-    }).catch((err)=>{
-      console.log(err.email+''+err.credential+''+err.message)
-    })
-  }
-  googleLogin(){
-    var provider=new firebase.auth.GoogleAuthProvider()
-    fire.auth().signInWithPopup(provider).then((result)=>{
-      console.log('Logged in with Google!')
-    }).catch((err)=>{
-      console.log(err.email+''+err.credential+''+err.message)
-    })
   }
   handleChange(e){
     this.setState({[e.target.name]:e.target.value})
@@ -100,12 +88,13 @@ class Login extends React.Component{
         <img src={logo} alt="logo" className="logo"/>
         <h1>Welcome to Online Attendance Manager!</h1>
         <br/>
+        <h3><u>Teacher Section</u></h3>
         <Collapse isOpen={!this.state.signup&&!this.state.forget}>
           <Form onSubmit={this.loginForm}>
             <FormGroup>
               <div className="row">
                 <div className="offset-1 col-10">
-                  <Input onChange={this.handleChange} name="email" value={this.state.email} type="email" placeholder="Enter Email"/>
+                  <Input onChange={this.handleChange} name="email" value={this.state.email} type="email" placeholder="College/Institute Email"/>
                 </div>
               </div>
               <div className="row">
@@ -126,7 +115,7 @@ class Login extends React.Component{
             <FormGroup>
               <div className="row">
                 <div className="offset-1 col-10">
-                  <Input onChange={this.handleChange} name="emailforg" value={this.state.emailforg} type="email" placeholder="Enter Email"/>
+                  <Input onChange={this.handleChange} name="emailforg" value={this.state.emailforg} type="email" placeholder="College/Institute Email"/>
                 </div>
               </div>
               <div className="row">
@@ -142,19 +131,14 @@ class Login extends React.Component{
           <FormGroup>
           <div className="row">
               <div className="offset-1 col-10">
-                <Input onChange={this.handleChange} name="name" value={this.state.name} type="name" placeholder="Enter Name"/>
+                <Input onChange={this.handleChange} name="name" value={this.state.name} type="name" placeholder="College/Institute Name"/>
               </div>
             </div>
             <div className="row">
               <div className="offset-1 col-10">
-                <Input onChange={this.handleChange} name="emails" value={this.state.emails} type="email" placeholder="Enter Email"/>
+                <Input onChange={this.handleChange} name="emails" value={this.state.emails} type="email" placeholder="College/Institute Email"/>
               </div>
             </div>
-            {/*<div className="row">
-              <div className="offset-1 col-10">
-                <Input onChange={this.handleChange} name="phone" value={this.state.phone} type="tel" placeholder="Mobile No."/>
-              </div>
-            </div>*/}
             <div className="row">
               <div className="offset-1 col-10">
                 <Input onChange={this.handleChange} name="passwords" value={this.state.passwords} type="password" placeholder="Enter Password" htmlFor="passwords"/>
@@ -173,15 +157,19 @@ class Login extends React.Component{
           </FormGroup>
         </Form>
         </Collapse>
-        <br/><h7 id="h" onClick={this.toggleForget}>{this.state.signup?(''):(<i>Forgotten Password?</i>)}</h7>
-        <br/><h6 id="h" onClick={this.toggleSignUp}>{this.state.signup?(<u>Already have account. Click Here!</u>):(<u>Not an account. Click Here!</u>)}</h6>
-        <h6><strong>OR</strong></h6>
-        <Button block size="md" type="button" color="primary" onClick={this.facebookLogin}><i className="fa fa-lg fa-facebook"></i>&nbsp;&nbsp;Continue with Facebook</Button>
-        <Button block size="md" type="button" color="success" onClick={this.googleLogin}><i className="fa fa-lg fa-google"></i>&nbsp;&nbsp;Continue with Google</Button>
+        <br/>
+        <h7 id="h" onClick={this.toggleForget}>{this.state.signup?(''):(<i>Forgotten Password?</i>)}</h7>
+        <br/><h6 id="h" onClick={this.toggleSignUp}>{this.state.signup?(<u>Already have College/Institute ID? Click Here.</u>):(<u>Not have College/Institute ID. Click Here!</u>)}</h6>
+
+        <br/><br/><br/><br/>
+        <div className="note">
+          <h7><strong>Note:</strong> College/Institue are allowed to register only one time with <strong>College/Institute Email</strong> and a Password. This will generate a unique id (this will bee college ID), which should be distributed among teachers and students.</h7><br/>
+          <h7><strong>Caution: </strong>Do not share password to students! </h7>
+        </div>
       </div>
       </>
   )
   }
 }
 
-export default Login;
+export default TeacherLogin;

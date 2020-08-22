@@ -15,7 +15,7 @@ class Profile extends React.Component{
       isName:false,
       isEmail:false,
       isPassword:false,
-      current:''
+      current:'',
     }
     this.verifyEmail=this.verifyEmail.bind(this)
     this.openEdit=this.openEdit.bind(this)
@@ -82,8 +82,12 @@ class Profile extends React.Component{
           <h3>{this.state.user.displayName}</h3>
         </div>
         <div className="details">
+          <div className="collegeinfo">
+            <h6>{this.props.college.collegename}</h6>
+            <h6>{this.props.college.connected?(<Badge color="success">Connected</Badge>):(<Badge color="warning">Not Connected</Badge>)}</h6>
+            <h6>ID: {this.props.college.id}</h6>
+          </div>
           <h6>Email: {this.state.user.email}  <Badge onClick={this.verifyEmail} color="danger">{this.state.user.emailVerified?('Verified'):('Not Verified')}</Badge></h6>
-          <h6>Phone No.: {this.state.user.phoneNumber?(this.state.user.phoneNumber):('Not Provided')}</h6>
         </div>
         <Modal isOpen={this.state.isOpen} toggle={this.openEdit}>
           <ModalHeader className="modal-header">
